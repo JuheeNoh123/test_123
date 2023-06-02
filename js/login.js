@@ -47,11 +47,13 @@ function get_id(){
 function login_check(){
 	var url = location.href;
 	var imformation = (url.slice(url.indexOf("?")+1, url.length)).split("&");
-	var email = imformation[0].split('=')[1];
+	var email = decodeURIComponent(imformation[0].split('=')[1]);
 	var pw = imformation[1].split('=')[1];
-	var regexr1 = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
-	//어떤걸 확인하는지는 모르겠음
-	var regexr2 = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	var regexr1 = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+	//메일 주소 형식에 맞는지 검사한다.
+	var regexr2 = /^[A-Za-z0-9]{4,10}$/;
+	// 알파벳 대소문자 또는 숫자로 시작하고 끝나며 4 ~10자리인지 검사
+	// {4,10}: 4 ~ 10자리
 	console.log(regexr1.test(email));
 	console.log(regexr2.test(pw));
 	
