@@ -16,8 +16,9 @@
 		<script type="text/javascript" src="js/hover.js" defer></script>
 		<script type="text/javascript" src="js/pop_up.js" defer></script>
 		<script type="text/javascript" src="js/login.js" defer></script>
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 	</head>
-	<body onload="get_id();">
+	<body onload="get_id(); setTime();">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> <!JS 적용,BS 연동>
 		<!nav바 추가>
 		<nav class="navbar navbar-expand-lg bg-light">
@@ -55,7 +56,9 @@
 
 		<hr> <!--밑줄--><br><br><!--줄바꿈 2번-->
 		<! 구글 이미지 코드>
-
+		<div id ="logoutClock" class = "clock">
+		</div>
+		
 		<div class ="mx-auto" style="width: 500px"> <!500내에서 이미지 사이즈 반응>
 			<a href = "index.html" target = "_self"> <!그림에 하이퍼링크 달아놓고 클릭시 해당 url로 이동>
 			<img src="img/Google_logo.png" class="img-fluid" alt="google" onmouseover="over(this)" onmouseout="out(this)">

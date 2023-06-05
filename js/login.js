@@ -1,4 +1,3 @@
-
 //시작할 때 아이디 기억
 function init(){
 	let id = document.querySelector("#floatingInput");
@@ -9,7 +8,9 @@ function init(){
 		id.value = get_id;
 		check.checked = true;
 	}
+	session_check();	//세션 유무 검사
 }
+
 
 function login(){
     let form = document.querySelector("#form_main");
@@ -40,21 +41,22 @@ function login(){
         alert("아이디와 비밀번호를 모두 입력해주세요.")
     }
 	else if(rst == true){
+		session_set();
 		form.submit();
 	}
 	else{
         return;
     }
-	
-	
 }
+
 
 function setCookie(name, value, expiredays) {
         var date = new Date();		// 시간 불러오는 함수
         date.setDate(date.getDate() + expiredays);	//set 날짜함수는 날짜 데이터의 원하는 형식만 다른 값으로 교체하는 함수
         // 현재 날짜에 원하는만료일수를 더함
-		document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "SameSite=None; Secure";;        
-    }
+		document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "SameSite=None; Secure";        
+}
+
 
 // 쿠키를 Get 하는 함수 : 쿠키를 얻음
 function getCookie(name) {
@@ -74,19 +76,30 @@ function getCookie(name) {
         return ;
 }
 
+
 //만료기한 지나면 쿠키 삭제하는것 같음
 function deleteCookie(cookieName){
 	var expireDate = new Date();
 	expireDate.setDate(expireDate.getDate() - 1);
 	document.cookie = cookieName + "= " + "; expires="+ expireDate.toGMTString();
+	
 }
+
 
 function logout(){
-    location.href='../index.html';
+    session_del();
+	logoutdeleteCookie("login_cnt");
+	location.href='../index.html';
+	
 }
 
+
 function get_id(){
-	var getParameters = function(paramName){
+	if(true){
+		decrypt_text();
+	}
+	else{
+		var getParameters = function(paramName){
 		var returnValue;
 		var url = location.href;		//현재 접속중인 주소 정보 저장
 		var parameters = (url.slice(url.indexOf("?")+1, url.length)).split("&");	//?기준 자른(slice) 후 split으로 나눔(분리)
@@ -104,19 +117,18 @@ function get_id(){
 		
 	};	// 함수 끝
 	alert(getParameters('id')+'님 반갑습니다!');	//메세지창 출력
+	}
+	
 	
 }
+
 
 //9주차 응용문제 
 // 아이디, 패스워드 필터링 하기(정규 표현식 값사용, test()함수로 값 검사 가능)
 //정규 표현식 : 문자열에서 특정 내용을 찾거나 대체 또는 발췌하는데 사용
 // 이메일과 비밀번호 형태를 제대로 띄고 있나 검사하는 용도 같음.
 function login_check(){
-	//var url = location.href;
-	//var imformation = (url.slice(url.indexOf("?")+1, url.length)).split("&");
-	//var email = decodeURIComponent(imformation[0].split('=')[1]);
-	//var pw = imformation[1];
-	
+
 	let id = document.querySelector("#floatingInput");
     let password = document.querySelector("#floatingPassword");
 	
@@ -148,27 +160,36 @@ function login_check(){
 
 //10주차 응용문제 
 function login_count(){
-	var get_logincookie = getloginCookie("login_cnt");
+	var glc = getloginCookie("login_cnt");
 	
-	if(get_logincookie == ""){
-		let cnt = Number(0);
+	if(glc == ""){
+		//let cnt = Number(0);
+		var cnt = Number(0);
 	}
 	else{
-		cnt = get_logincookie;
-		setloginCookie("login_cnt",cnt) ;
-		console.log(get_logincookie);
+		cnt = Number(glc);	
 	}
 	
-	if (get_logincookie > 5){
-		alert("로그인가능 횟수를 초과했습니다.")
+	setloginCookie("login_cnt",cnt) ;
+	console.log(glc);
+	
+	if (glc > 2){
+		alert("로그인가능 횟수를 초과했습니다.");
+		btnActive();
 	}
-	
-	
+		
+}
+
+//버튼 비활성화
+function btnActive()  {
+  const target = document.getElementById('target_btn');
+  target.disabled = true;
 }
 
 function setloginCookie(name, value) {
         // 현재 날짜에 원하는만료일수를 더함
-		document.cookie = escape(name) + "=" + escape(value) ;        
+		document.cookie = escape(name) + "=" + escape(value) ;     
+	
     }
 
 // 쿠키를 Get 하는 함수 : 쿠키를 얻음
@@ -183,14 +204,126 @@ function getloginCookie(name) {
                 console.log(cookie_name);
                 if (cookie_name[0] == "login_cnt") {	//키가 팝업YN이면
 					
-					let cookiename = Number(cookie_name[1]);
-					cookiename += 1;
+					let cookievalue = Number(cookie_name[1]) + 1;
+					document.cookie = cookie_name[0]+"="+cookievalue;
+					return cookievalue;
 					//console.log(typeof(cookiename));
-                    return cookiename;		//값을 리턴
-					
+                    
                 }
-            }
-            
+        	}
         }
-        return ;
+        return;		//값을 리턴	;
+}
+
+
+function logoutdeleteCookie(cookieName){
+	document.cookie = escape(cookieName) + "= ";
+	
+}
+
+
+
+//11주차 세션
+function session_set() {
+	let id = document.querySelector("#floatingInput");
+	let password = document.querySelector("#floatingPassword");
+	
+	if (sessionStorage)	{
+		let en_text = encrypt_text(password.value);
+		sessionStorage.setItem("Session_Storage_test",en_text);
+		// setItem(key, value)  :  해당 키값에 대한 데이터 저장
+	}
+	else{
+		alert("세션 스토리지 지원");
+	}
+}
+
+
+function session_get(){
+	if (sessionStorage){
+		return sessionStorage.getItem("Session_Storage_test");
+		//getItem(key) : 해당 key값에 해당하는 데이터(문자열)을 반환
+	}
+	else{
+		alert("세션 스토리지 지원 X");
+	}
+}
+
+
+function session_check(){	//세션 검사
+	if (sessionStorage.getItem("Session_Storage_test")) {
+		alert("이미 로그인 되었습니다.");
+		location.href = 'index_login.html';
+	}
+}
+
+function session_del(){
+	
+	if(sessionStorage){
+		sessionStorage.removeItem("Session_Storage_test");
+		alert('로그아웃 버튼 클릭 확인 : 세션 스토리지를 삭제합니다.');
+	}
+	else {
+		alert('세션 스토리지 지원 X');
+	}
+}
+
+//암/복호화 함수
+function encodeByAES256(key, data){
+    const cipher = CryptoJS.AES.encrypt(data, CryptoJS.enc.Utf8.parse(key), {
+        iv: CryptoJS.enc.Utf8.parse(""),
+        padding: CryptoJS.pad.Pkcs7,
+        mode: CryptoJS.mode.CBC
+    });
+    return cipher.toString();
+}
+
+function decodeByAES256(key, data){
+    const cipher = CryptoJS.AES.decrypt(data, CryptoJS.enc.Utf8.parse(key), {
+        iv: CryptoJS.enc.Utf8.parse(""),
+        padding: CryptoJS.pad.Pkcs7,
+        mode: CryptoJS.mode.CBC
+    });
+    return cipher.toString(CryptoJS.enc.Utf8);
+};
+
+function encrypt_text(password){
+    const k = "key"; // 클라이언트 키
+    const rk = k.padEnd(32, " "); // AES256은 key 길이가 32
+    const b = password;
+    const eb = this.encodeByAES256(rk, b);
+    return eb;
+    console.log(eb);
+}
+
+function decrypt_text(){
+    const k = "key"; // 서버의 키
+    const rk = k.padEnd(32, " "); // AES256은 key 길이가 32
+    const eb = session_get();
+    const b = this.decodeByAES256(rk, eb);
+    console.log(b); 
+}
+
+var close_time;	// 시간 정보
+var close_time2 =30;
+var str1 = "로그아웃까지 남은 시간은 ";
+var str2 = "초 입니다";
+
+function setTime(){
+	clearTimeout(close_time);
+	close_time = setTimeout("close_login()", 30000);
+	show_time();
+
+
+}
+
+function show_time(){
+	let divClock=document.getElementById('logoutClock');
+	divClock.innerText = str1 + close_time2 + str2;
+	close_time2--;
+	let showlogintime = setTimeout(show_time, 300000);	//5분 이따 시작
+}
+
+function close_login(){
+	logout();
 }
