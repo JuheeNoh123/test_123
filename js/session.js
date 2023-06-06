@@ -61,3 +61,41 @@ function session_del(){
 		alert('세션 스토리지 지원 X');
 	}
 }
+
+function session_join_set(){
+	let f_name = document.querySelector("#firstName").value;
+	let l_name = document.querySelector("#lastName").value;
+	let b_day = document.querySelector("#birthdayDate").value;
+	let gender = document.querySelector("#inlineRadioOptions");
+    let email = document.querySelector("#emailAddress").value;
+    let p_number = document.querySelector("#phoneNumber").value;
+    let class_check = document.querySelector(".select form-control-lg");
+    let random = new Date(); // 랜덤 타임스탬프
+	
+	const newSignUp = new SignUp(f_name, l_name, b_day, gender, email, p_number, class_check, random);
+	console.log(newSignUp.fullName);
+	console.log(newSignUp.contactInfo);
+	
+	if(sessionStorage){
+		const objString = JSON.stringify(newSignUp);
+		let en_text = encrypt_text(objString); // 암호화
+        sessionStorage.setItem("Session_Storage_object", objString);
+        sessionStorage.setItem("Session_Storage_encryted", en_text);
+	}
+	else {
+        alert("세션 스토리지 지원 x");
+    } 
+}
+
+function session_join_get(){
+	if (sessionStorage){
+		console.log(sessionStorage.getItem("Session_Storage_object"));
+		//decrypt_text();
+		
+		//getItem(key) : 해당 key값에 해당하는 데이터(문자열)을 반환
+	}
+	else{
+		alert("세션 스토리지 지원 X");
+	}
+}
+
