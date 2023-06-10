@@ -108,14 +108,17 @@ function login_check(){
 	
 	if(rst1 != true){
 		alert("이메일 형식을 확인해주세요.");
+		console.log(rst1);
 	}
 	
 	else if(rst2 != true){
 		alert("비밀번호 형식이 알파벳 대소문자 또는 숫자로 시작하고 끝나며 4 ~10자리인지 확인해주세요.");
+		console.log(rst2);
 	}
 	
 	else{
 		return true;
+		
 	}
 		//return(rst1,rst2);
 	//return regexr1.test(email), regexr2.test(pw);

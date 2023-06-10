@@ -89,10 +89,10 @@ function session_join_set(){
 
 function session_join_get(){
 	if (sessionStorage){
-		console.log(sessionStorage.getItem("Session_Storage_object"));
+		return sessionStorage.getItem("Session_Storage_encryted");
 		//decrypt_text();
 		
-		//getItem(key) : 해당 key값에 해당하는 데이터(문자열)을 반환
+	
 	}
 	else{
 		alert("세션 스토리지 지원 X");
