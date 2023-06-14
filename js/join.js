@@ -1,3 +1,15 @@
+function addJavascript(jsname){
+	var th = document.getElementsByTagName('head')[0];
+	var s = document.createElement('script');
+	s.setAttribute('type','text/javascript');
+	s.setAttribute('src',jsname);
+	th.appendChild(s);
+}
+
+addJavascript('/js/security.js');
+addJavascript('/js/cookie.js');
+addJavascript('/js/session.js');
+
 class SignUp{
 	constructor(firstName, lastName, birthdayDate, gender, emailAddress,phoneNumber,classNumber, random){
 		this.firstName = firstName;
@@ -50,11 +62,7 @@ function join(){ // 회원가입
         alert("회원가입 폼에 모든 정보를 입력해주세요.(성별, 분반 제외)");
     }
 	else{
-		
-		
-		decrypt_test();
-		
-		
+
 		session_join_set();
         form.submit();
 		
@@ -64,14 +72,4 @@ function join(){ // 회원가입
 }
 
 
-function addJavascript(jsname){
-	var th = document.getElementsByTagName('head')[0];
-	var s = document.createElement('script');
-	s.setAttribute('type','text/javascript');
-	s.setAttribute('src',jsname);
-	th.appendChild(s);
-}
 
-addJavascript('/js/security.js');
-addJavascript('/js/cookie.js');
-addJavascript('/js/session.js');
