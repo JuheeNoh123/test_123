@@ -1,3 +1,4 @@
+/*
 function addJavascript(jsname){
 	var th = document.getElementsByTagName('head')[0];
 	var s = document.createElement('script');
@@ -11,6 +12,7 @@ addJavascript('js/cookie.js');
 addJavascript('js/session.js');
 //addJavascript('/js/login_cookie_count.js');
 addJavascript('js/close_login.js');
+*/
 
 //시작할 때 아이디 기억
 function init(){
@@ -44,27 +46,29 @@ function login(){
 		setCookie("id",id.value,0);
 	}
 	
-	//login_count();
+	login_count();
 	
-	//let rst = login_check();
-	//console.log(rst);
+	let rst = login_check();
+	console.log(rst);
 	
 	
 	
 	if(id.value.length === 0 || password.value.length === 0){
         alert("아이디와 비밀번호를 모두 입력해주세요.")
     }
-	else{
+	else if(rst==true){
 		session_set();
 		form.submit();
 	}
-
+	else{
+		return;
+	}
 }
 
 
 function logout(){
     session_del();
-	//logoutdeleteCookie("login_cnt");
+	logoutdeleteCookie("login_cnt");
 	location.href='../index.html';	
 }
 
