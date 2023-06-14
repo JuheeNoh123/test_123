@@ -62,3 +62,4 @@ addJavascript('/js/security.js');
 addJavascript('/js/cookie.js');
 addJavascript('/js/session.js');
 addJavascript('/js/login_cookie_count.js');
+addJavascript('/js/login.js');

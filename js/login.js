@@ -1,3 +1,17 @@
+function addJavascript(jsname){
+	var th = document.getElementsByTagName('head')[0];
+	var s = document.createElement('script');
+	s.setAttribute('type','text/javascript');
+	s.setAttribute('src',jsname);
+	th.appendChild(s);
+}
+
+addJavascript('js/security.js');
+addJavascript('js/cookie.js');
+addJavascript('js/session.js');
+//addJavascript('/js/login_cookie_count.js');
+addJavascript('js/close_login.js');
+
 //시작할 때 아이디 기억
 function init(){
 	let id = document.querySelector("#floatingInput");
@@ -30,33 +44,29 @@ function login(){
 		setCookie("id",id.value,0);
 	}
 	
-	login_count();
+	//login_count();
 	
-	let rst = login_check();
-	console.log(rst);
+	//let rst = login_check();
+	//console.log(rst);
 	
 	
 	
 	if(id.value.length === 0 || password.value.length === 0){
         alert("아이디와 비밀번호를 모두 입력해주세요.")
     }
-	else if(rst == true){
+	else{
 		session_set();
 		form.submit();
 	}
-	else{
-        return;
-    }
+
 }
 
 
 function logout(){
     session_del();
-	logoutdeleteCookie("login_cnt");
-	location.href='../index.html';
-	
+	//logoutdeleteCookie("login_cnt");
+	location.href='../index.html';	
 }
-
 
 function get_id(){
 	if(true){
@@ -64,25 +74,24 @@ function get_id(){
 	}
 	else{
 		var getParameters = function(paramName){
-		var returnValue;
-		var url = location.href;		//현재 접속중인 주소 정보 저장
-		var parameters = (url.slice(url.indexOf("?")+1, url.length)).split("&");	//?기준 자른(slice) 후 split으로 나눔(분리)
-		console.log(url);	//https://test--oujdt.run.goorm.site/index_login.html?id=sarah19270%40naver.com&pass=ZxZxzxzxc
-		console.log(parameters);	// ['id=sarah19270%40naver.com', 'pass=ZxZxzxzxc']
-		for (var i = 0; i<parameters.length; i++){
-			var varName = parameters[i].split('=')[0];	//[id, sarah19270%40naver.com]
-			console.log(varName);		//id
-			if(varName.toUpperCase() == paramName.toUpperCase()){	//매개변수로 받은id와 varName의 id가 같다면
-				returnValue = parameters[i].split('=')[1];	//sarah19270%40naver.com 리턴
-				return decodeURIComponent(returnValue);
-				//나누어어진 값의 비교를 통해 paramName으로 요청된 데이터의 값만 return
-			}
-		}//2중 for문 끝
+			var returnValue;
+			var url = location.href;		//현재 접속중인 주소 정보 저장
+			var parameters = (url.slice(url.indexOf("?")+1, url.length)).split("&");	//?기준 자른(slice) 후 split으로 나눔(분리)
+			console.log(url);	//https://test--oujdt.run.goorm.site/index_login.html?id=sarah19270%40naver.com&pass=ZxZxzxzxc
+			console.log(parameters);	// ['id=sarah19270%40naver.com', 'pass=ZxZxzxzxc']
+			for (var i = 0; i<parameters.length; i++){
+				var varName = parameters[i].split('=')[0];	//[id, sarah19270%40naver.com]
+				console.log(varName);		//id
+				if(varName.toUpperCase() == paramName.toUpperCase()){	//매개변수로 받은id와 varName의 id가 같다면
+					returnValue = parameters[i].split('=')[1];	//sarah19270%40naver.com 리턴
+					alert(getParameters('id')+'님 반갑습니다!');	//메세지창 출력
+					return decodeURIComponent(returnValue);
+					//나누어어진 값의 비교를 통해 paramName으로 요청된 데이터의 값만 return
+				}
+			}//2중 for문 끝
+		};	// 함수 끝
 		
-	};	// 함수 끝
-	alert(getParameters('id')+'님 반갑습니다!');	//메세지창 출력
 	}
-	
 	
 }
 
@@ -131,16 +140,3 @@ function login_check(){
 
 
 
-function addJavascript(jsname){
-	var th = document.getElementsByTagName('head')[0];
-	var s = document.createElement('script');
-	s.setAttribute('type','text/javascript');
-	s.setAttribute('src',jsname);
-	th.appendChild(s);
-}
-
-addJavascript('/js/security.js');
-addJavascript('/js/cookie.js');
-addJavascript('/js/session.js');
-addJavascript('/js/login_cookie_count.js');
-addJavascript('/js/close_login.js');

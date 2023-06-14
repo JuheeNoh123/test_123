@@ -11,8 +11,8 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 		<!js 파일 추가>
 		<script type="text/javascript" src="js/search.js" defer></script>
-		<script type="text/javascript" src="js/basic_test.js" defer></script>
-		<script type="text/javascript" src="js/data_type.js" defer></script>
+		<!-- <script type="text/javascript" src="js/basic_test.js" defer></script> -->
+		<!-- <script type="text/javascript" src="js/data_type.js" defer></script> -->
 		<script type="text/javascript" src="js/hover.js" defer></script>
 		<script type="text/javascript" src="js/pop_up.js" defer></script>
 
@@ -59,19 +59,19 @@
 		<hr> <!--밑줄--><br><br><!--줄바꿈 2번-->
 		<! 구글 이미지 코드>
 
-		<div class ="mx-auto" style="width: 500px"> <!500내에서 이미지 사이즈 반응>
-			<a href = "index.html" target = "_self"> <!그림에 하이퍼링크 달아놓고 클릭시 해당 url로 이동>
+		<div class ="mx-auto" style="width: 500px"> <!--500내에서 이미지 사이즈 반응>
+			<a href = "index.html" target = "_self"> <!--그림에 하이퍼링크 달아놓고 클릭시 해당 url로 이동> -->
 			<img src="img/Google_logo.png" class="img-fluid" alt="google" onmouseover="over(this)" onmouseout="out(this)">
-			<!src는 경로,이미지 깨지면 alt 출력>
+			<!--src는 경로,이미지 깨지면 alt 출력-->
 			</a>
 		</div>
 		<br><br><br><br><br>
 		
-		<! form 태그 : 사용자의 입력 정보를 서버로 전송>
-		<!id 추가 / action : 전송서버 url / method : 전송방식 / onsubmit : (id와 동작 부분)>
-		<! 전송방식 1) GET : 링크에 중요 정보가 없는경우 / 2)post : id/passwd등 중요 정보가 있는경우>
+		<!-- <! form 태그 : 사용자의 입력 정보를 서버로 전송> -->
+		<!-- <!id 추가 / action : 전송서버 url / method : 전송방식 / onsubmit : (id와 동작 부분)> -->
+		<!-- <! 전송방식 1) GET : 링크에 중요 정보가 없는경우 / 2)post : id/passwd등 중요 정보가 있는경우> -->
 		<form id="form_main" action="https://www.google.co.kr/search" method="GET" target="_blank" onsubmit="return false">
-			<! 실제 구글 서버가 검색 결과를 웹브라우저에 리턴함>
+			<!-- <! 실제 구글 서버가 검색 결과를 웹브라우저에 리턴함> -->
 			<div class="d-flex justify-content-center">
 				<mx-auto>
 				<input name="query" type="text" class="form-control-lg" placeholder="검색어 입력하던가"	aria-label="search" aria-describedby="search_btn" id = "search_txt"></mx-auto>
@@ -79,18 +79,18 @@
 			</div>
 		</form>
 		<br><br><br><br><br><br><br>
-		<!표 - 클래스 추가로 디자인 수정 완료>
-		<div class="w-auto p-3" style="background-color:#;"> <!대체적인 크기 지정으로 추정>
-		<!레이아웃, 호버(셀 색 변화), 분리선, td 색상변경>
-			<table class = "table table-dark table-hover"> <!표 내용 어둡게>
+		<!-- <!표 - 클래스 추가로 디자인 수정 완료> -->
+		<div class="w-auto p-3" style="background-color:#;"> <!--대체적인 크기 지정으로 추정-->
+		<!-- <!레이아웃, 호버(셀 색 변화), 분리선, td 색상변경> -->
+			<table class = "table table-dark table-hover"> <!--표 내용 어둡게 -->
 				<caption align="top">현재검색어 : <p id = "search_message"></p></caption>
 				<tbody class="table-group-divider">
 					<tr bgcolor = "yellow">
-						<td class = "table-primary" width = "70"><b>키워드</b></td> <!색 적용 안됨>
-						<td>피곤해</td> <!색 적용 안됨>
-						<td>귀찮아</td> <!색 적용 안됨>
-						<td><!--<font color = "white">-->넘시러</td> <!색 적용 안됨>
-						<td><!--<font color = "white">-->배고팡</td> <!색 적용 안됨>
+						<td class = "table-primary" width = "70"><b>키워드</b></td> <!--색 적용 안됨-->
+						<td>피곤해</td> <!--색 적용 안됨-->
+						<td>귀찮아</td> <!--색 적용 안됨-->
+						<td><!--<font color = "white">-->넘시러</td> <!--색 적용 안됨-->
+						<td><!--<font color = "white">-->배고팡</td> <!--색 적용 안됨-->
 					</tr> <!1행>
 					<tr bgcolor = "pink">
 						<td class = "table-secondary" width = “70”><b>프로필</b></td>
@@ -104,20 +104,20 @@
 						<td>제페토</td>
 						<td>유니티</td>
 						<td colspan="2">텍스트</td>
-					</tr> <!3행>
+					</tr> <!--3행-->
 				</tbody>
 			</table>
 		</div>
 		<hr>
-		<!하단 글자>
+		<!-- <!하단 글자> -->
 		<p style = "text-align:right;">
 			<font size ="3em" color = "gray">노주희 짱짱 걸</font>
 		</p>
 		<br>
-		<!부트스트랩을 활용한 아이콘 삽입>
+		<!-- <!부트스트랩을 활용한 아이콘 삽입> -->
 		<footer class = "bg-light text-center text-lg-start">
 			<div class="text-center p-3" style = "background-color:#D8D8D8;">
-				<h3 class="text-secondary"> <!보조 내용인 텍스트>
+				<h3 class="text-secondary"> <!--보조 내용인 텍스트-->
 					Noh Juhee
 				</h3>
 			© 2020 Copyright: <a class="text-dark" href="https://test--oujdt.run.goorm.site/">쭈히.com</a>
